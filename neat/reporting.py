@@ -131,8 +131,8 @@ class StdOutReporter(BaseReporter):
         fit_mean = mean(fitnesses)
         fit_std = stdev(fitnesses)
         best_species_id = species.get_species_id(best_genome.key)
-        #print('Population\'s average fitness: {0:3.5f} stdev: {1:3.5f}'.format(fit_mean, fit_std))
-        print('Best fitness: {0:3.5f} - size: {1!r} - species {2:2d} - id {3:5d}'.format(best_genome.fitness, best_genome.size(), best_species_id, best_genome.key))
+        print('Population\'s average fitness: {0:3.5f} stdev: {1:3.5f}'.format(fit_mean, fit_std), end='')
+        print(' Best fitness: {0:3.5f} - size: {1!r} - species {2:2d} - id {3:5d}'.format(best_genome.fitness, best_genome.size(), best_species_id, best_genome.key))
 
     def complete_extinction(self):
         self.num_extinctions += 1
