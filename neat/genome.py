@@ -453,7 +453,7 @@ class DefaultGenome(object):
     def __str__(self):
         s = f"Key: {self.key}\nFitness: {self.fitness}\nNodes:"
         for k, ng in self.nodes.items():
-            s += f"\n\t{k} {ng!s}"
+            s += f"\n\t{k:4d} {ng!s}"
         s += "\nConnections:"
         connections = list(self.connections.values())
         connections.sort()
