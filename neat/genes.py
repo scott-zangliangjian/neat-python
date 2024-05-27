@@ -135,7 +135,35 @@ class DefaultConnectionGene(BaseGene):
 
     def __init__(self, key):
         assert isinstance(key, tuple), f"DefaultConnectionGene key must be a tuple, not {key!r}"
+
+        # Attribute-specific formats
+        self._formats = {
+            'weight': '{:+6.4f}',
+            'key':    self.format_tuple
+        }
+
         BaseGene.__init__(self, key)
+
+    def format_tuple(self, value):
+        return '(' + ', '.join(f'{v:+5d}' if isinstance(v, int) else str(v) for v in value) + ')'
+
+    def __str__(self):
+        attrib = ['key'] + [a.name for a in self._gene_attributes]
+        
+        formatted_attrib = []
+        for a in attrib:
+            value = getattr(self, a)
+            if a in self._formats:
+                format_spec = self._formats[a]
+                if callable(format_spec):
+                    formatted_value = format_spec(value)
+                else:
+                    formatted_value = format_spec.format(value)
+                formatted_attrib.append(f'{a}={formatted_value}')
+            else:
+                formatted_attrib.append(f'{a}={value}')
+        
+        return f'{self.__class__.__name__}({", ".join(formatted_attrib)})'
 
     def distance(self, other, config):
         d = abs(self.weight - other.weight)
