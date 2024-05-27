@@ -89,10 +89,31 @@ class DefaultNodeGene(BaseGene):
                         StringAttribute('activation', options=''),
                         StringAttribute('aggregation', options='')]
 
+
     def __init__(self, key):
         assert isinstance(key, int), f"DefaultNodeGene key must be an int, not {key!r}"
+
+        # Attribute-specific formats
+        self._formats = {
+            'key':  '{:4d}',
+            'bias': '{:+6.4f}',
+        }
         BaseGene.__init__(self, key)
 
+    def __str__(self):
+        attrib = ['key'] + [a.name for a in self._gene_attributes]
+        
+        formatted_attrib = []
+        for a in attrib:
+            value = getattr(self, a)
+            if a in self._formats:
+                formatted_value = self._formats[a].format(value)
+                formatted_attrib.append(f'{a}={formatted_value}')
+            else:
+                formatted_attrib.append(f'{a}={value}')
+        
+        return f'{self.__class__.__name__}({", ".join(formatted_attrib)})'
+    
     def distance(self, other, config):
         d = abs(self.bias - other.bias) + abs(self.response - other.response)
         if self.activation != other.activation:
