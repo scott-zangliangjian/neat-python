@@ -96,7 +96,7 @@ class StdOutReporter(BaseReporter):
 
     def start_generation(self, generation):
         self.generation = generation
-        #print('\n ****** Running generation {0} ****** \n'.format(generation))
+        print('****** Running generation {0:3d} ****** '.format(generation), end='')
         self.generation_start_time = time.time()
 
     def end_generation(self, config, population, species_set):
