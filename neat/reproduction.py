@@ -57,20 +57,15 @@ class DefaultReproduction(DefaultClassConfig):
 
         spawn_amounts = []
         for af, ps in zip(adjusted_fitness, previous_sizes):
-            if af_sum > 0:
-                s = max(min_species_size, af / af_sum * pop_size)
-            else:
-                s = min_species_size
+            if af_sum > 0: s = max(min_species_size, af / af_sum * pop_size)
+            else:          s =     min_species_size
 
             d = (s - ps) * 0.5
             c = int(round(d))
             spawn = ps
-            if abs(c) > 0:
-                spawn += c
-            elif d > 0:
-                spawn += 1
-            elif d < 0:
-                spawn -= 1
+            if abs(c) > 0: spawn += c
+            elif    d > 0: spawn += 1
+            elif    d < 0: spawn -= 1
 
             spawn_amounts.append(spawn)
 
