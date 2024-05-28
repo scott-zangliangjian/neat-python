@@ -22,18 +22,12 @@ class Population(object):
         self.reporters = ReporterSet()
         self.config = config
         stagnation = config.stagnation_type(config.stagnation_config, self.reporters)
-        self.reproduction = config.reproduction_type(config.reproduction_config,
-                                                     self.reporters,
-                                                     stagnation)
-        if config.fitness_criterion == 'max':
-            self.fitness_criterion = max
-        elif config.fitness_criterion == 'min':
-            self.fitness_criterion = min
-        elif config.fitness_criterion == 'mean':
-            self.fitness_criterion = mean
+        self.reproduction = config.reproduction_type(config.reproduction_config, self.reporters, stagnation)
+        if   config.fitness_criterion == 'max':  self.fitness_criterion = max
+        elif config.fitness_criterion == 'min':  self.fitness_criterion = min
+        elif config.fitness_criterion == 'mean': self.fitness_criterion = mean
         elif not config.no_fitness_termination:
-            raise RuntimeError(
-                "Unexpected fitness_criterion: {0!r}".format(config.fitness_criterion))
+            raise RuntimeError("Unexpected fitness_criterion: {0!r}".format(config.fitness_criterion))
 
         if initial_state is None:
             # Create a population from scratch, then partition into species.
