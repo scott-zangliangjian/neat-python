@@ -53,15 +53,14 @@ class DefaultSpeciesSet(DefaultClassConfig):
     def __init__(self, config, reporters):
         # pylint: disable=super-init-not-called
         self.species_set_config = config
-        self.reporters = reporters
-        self.indexer = count(1)
-        self.species = {}
-        self.genome_to_species = {}
+        self.reporters          = reporters
+        self.indexer            = count(1)
+        self.species            = {}
+        self.genome_to_species  = {}
 
     @classmethod
     def parse_config(cls, param_dict):
-        return DefaultClassConfig(param_dict,
-                                  [ConfigParameter('compatibility_threshold', float)])
+        return DefaultClassConfig(param_dict, [ConfigParameter('compatibility_threshold', float)])
 
     def speciate(self, config, population, generation):
         """
@@ -136,7 +135,7 @@ class DefaultSpeciesSet(DefaultClassConfig):
 
         # Mean and std genetic distance info report
         if len(population) > 1:
-            gdmean = mean(distances.distances.values())
+            gdmean   = mean(distances.distances.values())
             gdstdev = stdev(distances.distances.values())
             #self.reporters.info('Mean genetic distance {0:.3f}, standard deviation {1:.3f}'.format(gdmean, gdstdev))
 
