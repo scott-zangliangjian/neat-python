@@ -91,9 +91,9 @@ class DefaultSpeciesSet(DefaultClassConfig):
             # The new representative is the genome closest to the current representative.
             ignored_rdist, new_rep = min(candidates, key=lambda x: x[0])
             new_rid = new_rep.key
-            new_representatives[sid] = new_rid
-            new_members[sid] = [new_rid]
-            unspeciated.remove(new_rid)
+            new_representatives[sid] =  new_rid
+            new_members[sid]         = [new_rid]
+            unspeciated.remove(         new_rid)
 
         # Partition population into species based on genetic similarity.
         while unspeciated:
@@ -112,8 +112,7 @@ class DefaultSpeciesSet(DefaultClassConfig):
                 ignored_sdist, sid = min(candidates, key=lambda x: x[0])
                 new_members[sid].append(gid)
             else:
-                # No species is similar enough, create a new species, using
-                # this genome as its representative.
+                # No species is similar enough, create a new species, using this genome as its representative.
                 sid = next(self.indexer)
                 new_representatives[sid] = gid
                 new_members[sid] = [gid]
