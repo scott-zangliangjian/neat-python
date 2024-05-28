@@ -232,10 +232,8 @@ class DefaultGenome(object):
 
     def configure_crossover(self, genome1, genome2, config):
         """ Configure a new genome by crossover from two parent genomes. """
-        if genome1.fitness > genome2.fitness:
-            parent1, parent2 = genome1, genome2
-        else:
-            parent1, parent2 = genome2, genome1
+        if genome1.fitness > genome2.fitness: parent1, parent2 = genome1, genome2
+        else:                                 parent1, parent2 = genome2, genome1
 
         # Inherit connection genes
         for key, cg1 in parent1.connections.items():
