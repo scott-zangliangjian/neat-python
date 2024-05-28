@@ -263,31 +263,17 @@ class DefaultGenome(object):
         """ Mutates this genome. """
 
         if config.single_structural_mutation:
-            div = max(1, (config.node_add_prob + config.node_delete_prob +
-                          config.conn_add_prob + config.conn_delete_prob))
+            div = max(1, (config.node_add_prob + config.node_delete_prob + config.conn_add_prob + config.conn_delete_prob))
             r = random()
-            if r < (config.node_add_prob / div):
-                self.mutate_add_node(config)
-            elif r < ((config.node_add_prob + config.node_delete_prob) / div):
-                self.mutate_delete_node(config)
-            elif r < ((config.node_add_prob + config.node_delete_prob +
-                       config.conn_add_prob) / div):
-                self.mutate_add_connection(config)
-            elif r < ((config.node_add_prob + config.node_delete_prob +
-                       config.conn_add_prob + config.conn_delete_prob) / div):
-                self.mutate_delete_connection()
+            if   r <  (config.node_add_prob                                                                             / div): self.mutate_add_node(      config)
+            elif r < ((config.node_add_prob + config.node_delete_prob)                                                  / div): self.mutate_delete_node(   config)
+            elif r < ((config.node_add_prob + config.node_delete_prob + config.conn_add_prob)                           / div): self.mutate_add_connection(config)
+            elif r < ((config.node_add_prob + config.node_delete_prob + config.conn_add_prob + config.conn_delete_prob) / div): self.mutate_delete_connection()
         else:
-            if random() < config.node_add_prob:
-                self.mutate_add_node(config)
-
-            if random() < config.node_delete_prob:
-                self.mutate_delete_node(config)
-
-            if random() < config.conn_add_prob:
-                self.mutate_add_connection(config)
-
-            if random() < config.conn_delete_prob:
-                self.mutate_delete_connection()
+            if random() < config.node_add_prob:    self.mutate_add_node(      config)
+            if random() < config.node_delete_prob: self.mutate_delete_node(   config)
+            if random() < config.conn_add_prob:    self.mutate_add_connection(config)
+            if random() < config.conn_delete_prob: self.mutate_delete_connection()
 
         # Mutate connection genes.
         for cg in self.connections.values():
