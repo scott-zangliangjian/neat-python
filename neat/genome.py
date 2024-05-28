@@ -306,10 +306,9 @@ class DefaultGenome(object):
 
     def add_connection(self, config, input_key, output_key, weight, enabled):
         # TODO: Add further validation of this connection addition?
-        assert isinstance(input_key, int)
-        assert isinstance(output_key, int)
-        assert output_key >= 0
-        assert isinstance(enabled, bool)
+        assert isinstance(input_key,  int)
+        assert isinstance(output_key, int); assert output_key >= 0
+        assert isinstance(enabled,    bool)
         key = (input_key, output_key)
         connection = config.connection_gene_type(key)
         connection.init_attributes(config)
