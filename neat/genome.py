@@ -54,8 +54,8 @@ class DefaultGenomeConfig(object):
 
         # By convention, input pins have negative keys, and the output
         # pins have keys 0,1,...
-        self.input_keys = [-i - 1 for i in range(self.num_inputs)]
-        self.output_keys = [i for i in range(self.num_outputs)]
+        self.input_keys  = [-i - 1 for i in range(self.num_inputs)]
+        self.output_keys = [ i     for i in range(self.num_outputs)]
 
         self.connection_fraction = None
 
@@ -66,19 +66,15 @@ class DefaultGenomeConfig(object):
             self.initial_connection = c
             self.connection_fraction = float(p)
             if not (0 <= self.connection_fraction <= 1):
-                raise RuntimeError(
-                    "'partial' connection value must be between 0.0 and 1.0, inclusive.")
+                raise RuntimeError("'partial' connection value must be between 0.0 and 1.0, inclusive.")
 
         assert self.initial_connection in self.allowed_connectivity
 
         # Verify structural_mutation_surer is valid.
         # pylint: disable=access-member-before-definition
-        if self.structural_mutation_surer.lower() in ['1', 'yes', 'true', 'on']:
-            self.structural_mutation_surer = 'true'
-        elif self.structural_mutation_surer.lower() in ['0', 'no', 'false', 'off']:
-            self.structural_mutation_surer = 'false'
-        elif self.structural_mutation_surer.lower() == 'default':
-            self.structural_mutation_surer = 'default'
+        if   self.structural_mutation_surer.lower() in ['1', 'yes',  'true',  'on']: self.structural_mutation_surer = 'true'
+        elif self.structural_mutation_surer.lower() in ['0',  'no', 'false', 'off']: self.structural_mutation_surer = 'false'
+        elif self.structural_mutation_surer.lower() == 'default':                    self.structural_mutation_surer = 'default'
         else:
             error_string = f"Invalid structural_mutation_surer {self.structural_mutation_surer!r}"
             raise RuntimeError(error_string)
@@ -423,8 +419,7 @@ class DefaultGenome(object):
 
     def size(self):
         """
-        Returns genome 'complexity', taken to be
-        (number of nodes, number of enabled connections)
+        Returns genome 'complexity', taken to be (number of nodes, number of enabled connections)
         """
         num_enabled_connections = sum([1 for cg in self.connections.values() if cg.enabled])
         return len(self.nodes), num_enabled_connections
