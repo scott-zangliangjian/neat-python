@@ -155,10 +155,8 @@ class DefaultConnectionGene(BaseGene):
             value = getattr(self, a)
             if a in self._formats:
                 format_spec = self._formats[a]
-                if callable(format_spec):
-                    formatted_value = format_spec(value)
-                else:
-                    formatted_value = format_spec.format(value)
+                if callable(format_spec): formatted_value = format_spec(value)
+                else:                     formatted_value = format_spec.format(value)
                 formatted_attrib.append(f'{a}={formatted_value}')
             else:
                 formatted_attrib.append(f'{a}={value}')
