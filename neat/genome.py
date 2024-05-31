@@ -101,10 +101,8 @@ class DefaultGenomeConfig(object):
 
     def get_new_node_key(self, node_dict):
         if self.node_indexer is None:
-            if node_dict:
-                self.node_indexer = count(max(list(node_dict)) + 1)
-            else:
-                self.node_indexer = count(max(list(node_dict)) + 1)
+            if node_dict: self.node_indexer = count(max(list(node_dict)) + 1)
+            else:         self.node_indexer = count(max(list(node_dict)) + 1)
 
         new_id = next(self.node_indexer)
 
@@ -113,12 +111,9 @@ class DefaultGenomeConfig(object):
         return new_id
 
     def check_structural_mutation_surer(self):
-        if self.structural_mutation_surer == 'true':
-            return True
-        elif self.structural_mutation_surer == 'false':
-            return False
-        elif self.structural_mutation_surer == 'default':
-            return self.single_structural_mutation
+        if   self.structural_mutation_surer == 'true':    return True
+        elif self.structural_mutation_surer == 'false':   return False
+        elif self.structural_mutation_surer == 'default': return self.single_structural_mutation
         else:
             error_string = f"Invalid structural_mutation_surer {self.structural_mutation_surer!r}"
             raise RuntimeError(error_string)
