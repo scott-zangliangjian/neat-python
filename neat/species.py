@@ -66,11 +66,12 @@ class DefaultSpeciesSet(DefaultClassConfig):
         """
         Place genomes into species by genetic similarity.
 
-        Note that this method assumes the current representatives of the species are from the old
-        generation, and that after speciation has been performed, the old representatives should be
-        dropped and replaced with representatives from the new generation.  If you violate this
-        assumption, you should make sure other necessary parts of the code are updated to reflect
-        the new behavior.
+        Note that 
+        this method assumes the current representatives of the species are from the old generation, 
+        and that after speciation has been performed, 
+        the old representatives should be dropped and replaced with representatives from the new generation.  
+        If you violate this assumption, 
+        you should make sure other necessary parts of the code are updated to reflect the new behavior.
         """
         assert isinstance(population, dict)
 
