@@ -172,10 +172,8 @@ class DefaultGenome(object):
         # Add connections based on initial connectivity type.
 
         if 'fs_neat' in config.initial_connection:
-            if config.initial_connection == 'fs_neat_nohidden':
-                self.connect_fs_neat_nohidden(config)
-            elif config.initial_connection == 'fs_neat_hidden':
-                self.connect_fs_neat_hidden(config)
+            if   config.initial_connection == 'fs_neat_nohidden': self.connect_fs_neat_nohidden(config)
+            elif config.initial_connection == 'fs_neat_hidden':   self.connect_fs_neat_hidden(  config)
             else:
                 if config.num_hidden > 0:
                     print(
@@ -185,10 +183,8 @@ class DefaultGenome(object):
                         sep='\n', file=sys.stderr)
                 self.connect_fs_neat_nohidden(config)
         elif 'full' in config.initial_connection:
-            if config.initial_connection == 'full_nodirect':
-                self.connect_full_nodirect(config)
-            elif config.initial_connection == 'full_direct':
-                self.connect_full_direct(config)
+            if   config.initial_connection == 'full_nodirect': self.connect_full_nodirect(config)
+            elif config.initial_connection == 'full_direct':   self.connect_full_direct(  config)
             else:
                 if config.num_hidden > 0:
                     print(
@@ -198,10 +194,8 @@ class DefaultGenome(object):
                         sep='\n', file=sys.stderr)
                 self.connect_full_nodirect(config)
         elif 'partial' in config.initial_connection:
-            if config.initial_connection == 'partial_nodirect':
-                self.connect_partial_nodirect(config)
-            elif config.initial_connection == 'partial_direct':
-                self.connect_partial_direct(config)
+            if   config.initial_connection == 'partial_nodirect': self.connect_partial_nodirect(config)
+            elif config.initial_connection == 'partial_direct':   self.connect_partial_direct(  config)
             else:
                 if config.num_hidden > 0:
                     print(
