@@ -40,6 +40,7 @@ class DefaultReproduction(DefaultClassConfig):
         self.ancestors = {}
 
     def create_new(self, genome_type, genome_config, num_genomes):
+        #self.reporters.info("DefaultReproduction::create_new(num_genomes:{:d}) was called.")
         new_genomes = {}
         for i in range(num_genomes):
             key = next(self.genome_indexer)
@@ -78,6 +79,7 @@ class DefaultReproduction(DefaultClassConfig):
         return spawn_amounts
 
     def reproduce(self, config, species, pop_size, generation):
+        #self.reporters.info("DefaultReproduction::reproduce() was called.")
         """
         Handles creation of genomes, either from scratch or by sexual or
         asexual reproduction from parents.
