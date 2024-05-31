@@ -103,13 +103,9 @@ class Population(object):
             # Check for complete extinction.
             if not self.species.species:
                 self.reporters.complete_extinction()
-
-                # If requested by the user, create a completely new population,
-                # otherwise raise an exception.
+                # If requested by the user, create a completely new population, otherwise raise an exception.
                 if self.config.reset_on_extinction:
-                    self.population = self.reproduction.create_new(self.config.genome_type,
-                                                                   self.config.genome_config,
-                                                                   self.config.pop_size)
+                    self.population = self.reproduction.create_new(self.config.genome_type, self.config.genome_config, self.config.pop_size)
                 else:
                     raise CompleteExtinctionException()
 
