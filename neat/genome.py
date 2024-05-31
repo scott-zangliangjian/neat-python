@@ -444,7 +444,7 @@ class DefaultGenome(object):
         (Recurrent genomes will also include node self-connections.)
         """
         hidden = [i for i in self.nodes if i not in config.output_keys]
-        output = [i for i in self.nodes if i in config.output_keys]
+        output = [i for i in self.nodes if i     in config.output_keys]
         connections = []
         if hidden:
             for input_id in config.input_keys:
