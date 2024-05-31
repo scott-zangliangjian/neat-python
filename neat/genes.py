@@ -72,10 +72,8 @@ class BaseGene(object):
         # here because `choice` is substantially slower.
         new_gene = self.__class__(self.key)
         for a in self._gene_attributes:
-            if random() > 0.5:
-                setattr(new_gene, a.name, getattr(self, a.name))
-            else:
-                setattr(new_gene, a.name, getattr(gene2, a.name))
+            if random() > 0.5: setattr(new_gene, a.name, getattr(self,  a.name))
+            else:              setattr(new_gene, a.name, getattr(gene2, a.name))
 
         return new_gene
 
