@@ -44,9 +44,8 @@ class DefaultReproduction(DefaultClassConfig):
         new_genomes = {}
         for i in range(num_genomes):
             key = next(self.genome_indexer)
-            g = genome_type(key)
-            g.configure_new(genome_config)
-            new_genomes[key] = g
+            g = genome_type(key); g.configure_new(genome_config)
+            new_genomes[   key] = g
             self.ancestors[key] = tuple()
 
         return new_genomes
