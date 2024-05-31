@@ -140,7 +140,7 @@ class DefaultGenome(object):
 
     @classmethod
     def parse_config(cls, param_dict):
-        param_dict['node_gene_type'] = DefaultNodeGene
+        param_dict['node_gene_type']       = DefaultNodeGene
         param_dict['connection_gene_type'] = DefaultConnectionGene
         return DefaultGenomeConfig(param_dict)
 
@@ -149,15 +149,10 @@ class DefaultGenome(object):
         config.save(f)
 
     def __init__(self, key):
-        # Unique identifier for a genome instance.
-        self.key = key
-
-        # (gene_key, gene) pairs for gene sets.
+        self.key         = key
         self.connections = {}
-        self.nodes = {}
-
-        # Fitness results.
-        self.fitness = None
+        self.nodes       = {}
+        self.fitness     = None
 
     def configure_new(self, config):
         """Configure a new genome based on the given configuration."""
