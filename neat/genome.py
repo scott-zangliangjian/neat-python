@@ -213,12 +213,8 @@ class DefaultGenome(object):
         # Inherit connection genes
         for key, cg1 in parent1.connections.items():
             cg2 = parent2.connections.get(key)
-            if cg2 is None:
-                # Excess or disjoint gene: copy from the fittest parent.
-                self.connections[key] = cg1.copy()
-            else:
-                # Homologous gene: combine genes from both parents.
-                self.connections[key] = cg1.crossover(cg2)
+            if cg2 is None: self.connections[key] = cg1.copy()         # Excess or disjoint gene: copy from the fittest parent.
+            else:           self.connections[key] = cg1.crossover(cg2) # Homologous gene: combine genes from both parents.
 
         # Inherit node genes
         parent1_set = parent1.nodes
@@ -227,12 +223,8 @@ class DefaultGenome(object):
         for key, ng1 in parent1_set.items():
             ng2 = parent2_set.get(key)
             assert key not in self.nodes
-            if ng2 is None:
-                # Extra gene: copy from the fittest parent
-                self.nodes[key] = ng1.copy()
-            else:
-                # Homologous gene: combine genes from both parents.
-                self.nodes[key] = ng1.crossover(ng2)
+            if ng2 is None: self.nodes[key] = ng1.copy()         # Extra gene: copy from the fittest parent
+            else:           self.nodes[key] = ng1.crossover(ng2) # Homologous gene: combine genes from both parents.
 
     def mutate(self, config):
         """ Mutates this genome. """
@@ -250,13 +242,8 @@ class DefaultGenome(object):
             if random() < config.conn_add_prob:    self.mutate_add_connection(config)
             if random() < config.conn_delete_prob: self.mutate_delete_connection()
 
-        # Mutate connection genes.
-        for cg in self.connections.values():
-            cg.mutate(config)
-
-        # Mutate node genes (bias, response, etc.).
-        for ng in self.nodes.values():
-            ng.mutate(config)
+        for cg in self.connections.values(): cg.mutate(config) # Mutate connection genes.
+        for ng in self.nodes.values():       ng.mutate(config) # Mutate node genes (bias, response, etc.).
 
     def mutate_add_node(self, config):
         if not self.connections:
