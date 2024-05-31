@@ -121,18 +121,13 @@ class DefaultReproduction(DefaultClassConfig):
             af = (msf - min_fitness) / fitness_range
             afs.adjusted_fitness = af
 
-        adjusted_fitnesses = [s.adjusted_fitness for s in remaining_species]
-        avg_adjusted_fitness = mean(adjusted_fitnesses)  # type: float
-        #self.reporters.info("Average adjusted fitness: {:.3f}".format(avg_adjusted_fitness))
-
-        # Compute the number of new members for each species in the new generation.
-        previous_sizes = [len(s.members) for s in remaining_species]
+        adjusted_fitnesses = [    s.adjusted_fitness for s in remaining_species]; avg_adjusted_fitness = mean(adjusted_fitnesses); #self.reporters.info("Average adjusted fitness: {:.3f}".format(avg_adjusted_fitness))
+        previous_sizes     = [len(s.members)         for s in remaining_species]
         min_species_size = self.reproduction_config.min_species_size
-        # Isn't the effective min_species_size going to be max(min_species_size,
-        # self.reproduction_config.elitism)? That would probably produce more accurate tracking
-        # of population sizes and relative fitnesses... doing. TODO: document.
         min_species_size = max(min_species_size, self.reproduction_config.elitism)
         spawn_amounts = self.compute_spawn(adjusted_fitnesses, previous_sizes, pop_size, min_species_size)
+        # Isn't the effective min_species_size going to be max(min_species_size, self.reproduction_config.elitism)? 
+        # That would probably produce more accurate tracking of population sizes and relative fitnesses... doing. TODO: document.
 
         new_population = {}
         species.species = {}
