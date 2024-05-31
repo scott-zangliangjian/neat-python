@@ -50,24 +50,16 @@ class ConfigParameter(object):
                     value = self.default
 
         try:
-            if str == self.value_type:
-                return str(value)
-            if int == self.value_type:
-                return int(value)
-            if bool == self.value_type:
-                if value.lower() == "true":
-                    return True
-                elif value.lower() == "false":
-                    return False
-                else:
-                    raise RuntimeError(self.name + " must be True or False")
-            if float == self.value_type:
-                return float(value)
-            if list == self.value_type:
-                return value.split(" ")
+            if str   == self.value_type: return str(value)
+            if int   == self.value_type: return int(value)
+            if float == self.value_type: return float(value)
+            if list  == self.value_type: return value.split(" ")
+            if bool  == self.value_type:
+                if   value.lower() == "true":  return True
+                elif value.lower() == "false": return False
+                else: raise RuntimeError(self.name + " must be True or False")
         except Exception:
-            raise RuntimeError(
-                f"Error interpreting config item '{self.name}' with value {value!r} and type {self.value_type}")
+            raise RuntimeError(f"Error interpreting config item '{self.name}' with value {value!r} and type {self.value_type}")
 
         raise RuntimeError("Unexpected configuration type: " + repr(self.value_type))
 
