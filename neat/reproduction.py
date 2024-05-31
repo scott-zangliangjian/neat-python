@@ -78,12 +78,12 @@ class DefaultReproduction(DefaultClassConfig):
         return spawn_amounts
 
     def reproduce(self, config, species, pop_size, generation):
-        #self.reporters.info("DefaultReproduction::reproduce() was called.")
+        print(f"DefaultReproduction::reproduce(pop_size:{pop_size}) was called")
         """
-        Handles creation of genomes, either from scratch or by sexual or
-        asexual reproduction from parents.
+        Handles creation of genomes, either from scratch or by sexual or asexual reproduction from parents.
         """
-        # TODO: I don't like this modification of the species and stagnation objects,
+        # TODO: 
+        # I don't like this modification of the species and stagnation objects,
         # because it requires internal knowledge of the objects.
 
         # Filter out stagnated species, 
@@ -132,8 +132,7 @@ class DefaultReproduction(DefaultClassConfig):
         # self.reproduction_config.elitism)? That would probably produce more accurate tracking
         # of population sizes and relative fitnesses... doing. TODO: document.
         min_species_size = max(min_species_size, self.reproduction_config.elitism)
-        spawn_amounts = self.compute_spawn(adjusted_fitnesses, previous_sizes,
-                                           pop_size, min_species_size)
+        spawn_amounts = self.compute_spawn(adjusted_fitnesses, previous_sizes, pop_size, min_species_size)
 
         new_population = {}
         species.species = {}
