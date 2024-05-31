@@ -40,7 +40,7 @@ class DefaultReproduction(DefaultClassConfig):
         self.ancestors = {}
 
     def create_new(self, genome_type, genome_config, num_genomes):
-        #self.reporters.info("DefaultReproduction::create_new(num_genomes:{:d}) was called.")
+        print(f"DefaultReproduction::create_new(num_genomes:{num_genomes}) was called")
         new_genomes = {}
         for i in range(num_genomes):
             key = next(self.genome_indexer)
