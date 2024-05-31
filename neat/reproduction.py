@@ -53,21 +53,21 @@ class DefaultReproduction(DefaultClassConfig):
     @staticmethod
     def compute_spawn(adjusted_fitness, previous_sizes, pop_size, min_species_size):
         """Compute the proper number of offspring per species (proportional to fitness)."""
-        af_sum = sum(adjusted_fitness)
+        af_sum = sum(adjusted_fitness);                                         #print(f"af_sum:{af_sum}")
 
         spawn_amounts = []
         for af, ps in zip(adjusted_fitness, previous_sizes):
             if af_sum > 0: s = max(min_species_size, af / af_sum * pop_size)
             else:          s =     min_species_size
 
-            d = (s - ps) * 0.5
-            c = int(round(d))
+            d = (s - ps) * 0.5;                                                 #print(f"s:{s} ps:{ps} d:{d}")
+            c = int(round(d));                                                  #print(f"c:{c}")
             spawn = ps
             if abs(c) > 0: spawn += c
             elif    d > 0: spawn += 1
             elif    d < 0: spawn -= 1
 
-            spawn_amounts.append(spawn)
+            spawn_amounts.append(spawn);                                        #print(f"spawn:{spawn}")
 
         # Normalize the spawn amounts so that the next generation is roughly
         # the population size requested by the user.
