@@ -85,11 +85,12 @@ class DefaultReproduction(DefaultClassConfig):
         # TODO: I don't like this modification of the species and stagnation objects,
         # because it requires internal knowledge of the objects.
 
-        # Filter out stagnated species, collect the set of non-stagnated
-        # species members, and compute their average adjusted fitness.
-        # The average adjusted fitness scheme (normalized to the interval
-        # [0, 1]) allows the use of negative fitness values without
-        # interfering with the shared fitness scheme.
+        # Filter out stagnated species, 
+        # collect the set of non-stagnated species members, 
+        # and compute their average adjusted fitness.
+        # The average adjusted fitness scheme (normalized to the interval [0, 1]) 
+        # allows the use of negative fitness values 
+        # without interfering with the shared fitness scheme.
         all_fitnesses = []
         remaining_species = []
         for stag_sid, stag_s, stagnant in self.stagnation.update(species, generation):
